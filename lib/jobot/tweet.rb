@@ -1,14 +1,24 @@
 require "twitter"
+require "./lib/jobot/log"
 
 module Jobot
   class Tweet
     class << self
+      include Jobot::Log
+
       def all
         client.user_timeline
       end
 
       def update(post)
-        client.update(build_message(post))
+        Jobot::Log.log("debug", "Tweeting: #{post.title}")
+
+        begin
+          # client.update(build_message(post))
+          raise "ops"
+        rescue => e
+          Jobot::Log.log("debug", "Error on tweet: #{e}")
+        end
       end
 
       def build_message(post)

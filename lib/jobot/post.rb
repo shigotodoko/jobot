@@ -1,9 +1,12 @@
 require "httpi"
 require "json"
+require "./lib/jobot/log"
 
 module Jobot
   class Post
     class << self
+      include Jobot::Log
+
       def all
         response = fetch
 
@@ -19,6 +22,7 @@ module Jobot
       end
 
       def request
+        Jobot::Log.log("debug", "Requesting the published posts")
         HTTPI::Request.new.tap do |req|
           req.url = "https://www.shigotodoko.com/api/posts/published"
           req.headers = { "Content-Type" => "application/json" }

@@ -29,10 +29,5 @@ module Jobot
     # prepare the message and tweet
     Jobot::Tweet.update(post)
 
-    def self.log(level, message)
-      @log ||= Logger.new(STDOUT)
-      @log.level = Logger::DEBUG
-      @log.send(level, "[Jobot] - #{message}")
-    end
   end
 end
