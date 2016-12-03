@@ -15,7 +15,6 @@ module Jobot
 
         begin
           client.update(build_message(post))
-          raise "ops"
         rescue => e
           Jobot::Log.log("debug", "Error on tweet: #{e}")
         end
